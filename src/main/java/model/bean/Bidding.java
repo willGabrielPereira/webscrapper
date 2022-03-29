@@ -1,10 +1,13 @@
 package model.bean;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import connection.ConnectionFactory;
 
 public class Bidding {
 	private String title;
@@ -100,6 +103,16 @@ public class Bidding {
 
 	public void setHistorical(List<History> historical) {
 		this.historical = historical;
+	}
+	
+	
+	public void save() {
+		ConnectionFactory cf = ConnectionFactory.init().setConnection("populate");
+		try {
+			cf.post(this.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 

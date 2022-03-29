@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.williampereira.scrapper</groupId>
-  <artifactId>scrapper</artifactId>
+  <artifactId>webscrapper</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>scrapper</name>
   <description>web scrapper</description>
@@ -23,5 +23,12 @@
 		<artifactId>jsoup</artifactId>
 		<version>1.13.1</version>
 	</dependency>
+	
+	<dependency>
+	    <groupId>org.apache.httpcomponents</groupId>
+	    <artifactId>httpclient</artifactId>
+	    <version>4.5.13</version>
+	</dependency>
+	
   </dependencies>
 </project>

@@ -2,6 +2,11 @@ package model.bean;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import connection.ConnectionFactory;
+
 public class History {
 
 	private Date date;
@@ -41,17 +46,28 @@ public class History {
 		this.reason = reason;
 	}
 
+
+	public void save() {
+		ConnectionFactory cf = ConnectionFactory.init().setConnection("histories");
+		try {
+			cf.post(this.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("History [date=");
-		builder.append(date);
-		builder.append(", status=");
-		builder.append(status);
-		builder.append(", reason=");
-		builder.append(reason);
-		builder.append("]");
-		return builder.toString();
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		try {
+			json = mapper.writeValueAsString(this);
+		}catch(JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		return json;
 	}
 	
 	

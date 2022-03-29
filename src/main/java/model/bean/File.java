@@ -2,6 +2,11 @@ package model.bean;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import connection.ConnectionFactory;
+
 public class File {
 	private String url;
 	private Date date;
@@ -63,19 +68,28 @@ public class File {
 	}
 
 
+
+	public void save() {
+		ConnectionFactory cf = ConnectionFactory.init().setConnection("files");
+		try {
+			cf.post(this.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("File url=");
-		builder.append(url);
-		builder.append("\n date=");
-		builder.append(date);
-		builder.append("\n size=");
-		builder.append(size);
-		builder.append("\n name=");
-		builder.append(name);
-		builder.append("");
-		return builder.toString();
+		ObjectMapper mapper = new ObjectMapper();
+		String json = "";
+		try {
+			json = mapper.writeValueAsString(this);
+		}catch(JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		return json;
 	}
 	
 	
