@@ -116,7 +116,7 @@ public class Main {
 				);
 				bid.save();
 			}
-		} while(url != null || pagesVisited > 40);
+		} while(url != null || pagesVisited > 20);
 		
 	}
 	
